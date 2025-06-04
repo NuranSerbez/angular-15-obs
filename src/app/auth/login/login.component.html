@@ -1,1 +1,48 @@
-<p>login works!</p>
+<!-- <div class="login-page">
+  <h2>Login</h2>
+  <form (ngSubmit)="onLogin()">
+    <label for="email">Email:</label>
+    <input type="text" id="email" [(ngModel)]="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</div> -->
+<div class="login-page" style="display: flex; justify-content: center; margin-top: 50px;">
+  <div class="card" style="width: 22rem;">
+    <h3>GİRİŞ SAYFASI</h3>
+    <div class="card-body">
+      <form #loginForm="ngForm" (ngSubmit)="onLogin()">
+
+        <div class="form-group mb-3">
+          <label for="email">
+            <h5 class="card-title">E-posta</h5>
+          </label>
+          <input type="email" id="email" name="email" class="form-control" required [(ngModel)]="loginData.email"
+            #email="ngModel" />
+          <div *ngIf="email.invalid && email.touched" style="color: red;">
+            Geçerli bir e-posta girin
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="password">
+            <h5 class="card-title">Şifre</h5>
+          </label>
+          <input type="password" id="password" name="password" class="form-control" required
+            [(ngModel)]="loginData.password" #password="ngModel" />
+          <div *ngIf="password.invalid && password.touched" style="color: red;">
+            Şifre boş olamaz
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" (click)="onLogin()"class="btn btn-primary" [disabled]="loginForm.invalid">Giriş Yap</button>
+          <button class="btn btn-secondary" (click)="goToRegister()">Kayıt Ol</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
