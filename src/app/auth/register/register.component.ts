@@ -1,13 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-register',
-//   templateUrl: './register.component.html',
-//   styleUrls: ['./register.component.css']
-// })
-// export class RegisterComponent {
-
-// }
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
@@ -18,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   registerData = {

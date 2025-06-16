@@ -1,1 +1,48 @@
-<p>register works!</p>
+<div class="register-page" style="display: flex; justify-content: center; margin-top: 50px;">
+  <div class="card" style="width: 22rem;">
+    <h3>KAYIT SAYFASI</h3>
+    <div class="card-body">
+      <form #registerForm="ngForm" (ngSubmit)="onRegister()">
+
+        <div class="form-group mb-3">
+          <label for="email">
+            <h5 class="card-title">E-posta</h5>
+          </label>
+          <input type="email" id="email" name="email" class="form-control" required [(ngModel)]="registerData.email"
+            #email="ngModel" />
+          <div *ngIf="email.invalid && email.touched" style="color: red;">
+            Geçerli bir e-posta girin
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="password">
+            <h5 class="card-title">Şifre</h5>
+          </label>
+          <input type="password" id="password" name="password" class="form-control" required
+            [(ngModel)]="registerData.password" #password="ngModel" />
+          <div *ngIf="password.invalid && password.touched" style="color: red;">
+            Şifre boş olamaz
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="rol">
+            <h5 class="card-title">Rol Türü</h5>
+          </label>
+          <select id="rol" name="rol" class="form-control" required [(ngModel)]="registerData.rol" #rol="ngModel">
+            <option value="" disabled selected>Rol seçiniz</option>
+            <option value="user">Akademisyen</option>
+            <option value="admin">idareci</option>
+            <option value="admin">Öğrenci</option>
+          </select>
+          <div *ngIf="rol.invalid && rol.touched" style="color: red;">
+            Rol boş olamaz
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Kayıt Ol</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

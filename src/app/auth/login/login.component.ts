@@ -1,48 +1,56 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.css']
-// })
-// export class LoginComponent {
-// email: string = '';
-//   password: string = '';
-
-//   onSubmit() {
-//     console.log('Email :', this.email);
-//     console.log('Password:', this.password);
-//   }
-// }
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
   loginData = {
     email: '',
     password: '',
   };
 
-  constructor(private router: Router) {}
+  loading = false;
+  errorMessage = '';
 
   onLogin() {
-    if (this.loginData.email && this.loginData.password) {
-      localStorage.setItem('token', 'mock-token-123');
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('E-posta ve şifre boş olamaz.');
+    if (!this.loginData.email || !this.loginData.password) {
+      this.errorMessage = 'E-posta ve şifre boş olamaz.';
+      return;
     }
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.http.post<any>('http://localhost:8080/api/auth/login', this.loginData).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.role);
+
+        const role = response.role.toLowerCase();
+        this.router.navigate([`/${role}/dashboard`]);
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Giriş başarısız oldu.';
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
   }
+
   goToRegister() {
     this.router.navigate(['/register']);
   }
 }
-
