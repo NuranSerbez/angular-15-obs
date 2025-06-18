@@ -12,11 +12,18 @@ import { StudentPageComponent } from './student/student-page/student-page.compon
 import { RectorPageComponent } from './rector/rector-page/rector-page.component';
 import { Service } from './user/service';
 import { HttpClientModule } from '@angular/common/http';
+import { NotDetailComponent } from './not-detail/not-detail.component';
+import { RectorComponent } from './service/rector/rector.component';
+import { StudentComponent } from './service/student/student.component';
+import { HomeComponent } from './service/home/home.component';
+import { NoteComponent } from './rector/note/note.component';
 
 @NgModule({
   declarations: [
     AppComponent,
- 
+    RectorComponent,
+    StudentComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     RectorPageComponent,
     DashboardComponent,
      HttpClientModule,
+   NotDetailComponent,
+      NoteComponent,
 ],
   providers: [ Service, ],
   bootstrap: [AppComponent,]

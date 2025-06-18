@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
   { path: 'student', loadComponent: () => import('./student/student-page/student-page.component').then(m => m.StudentPageComponent) },
   { path: 'rector', loadComponent: () => import('./rector/rector-page/rector-page.component').then(m => m.RectorPageComponent) },
+  { path: 'note/:id', loadComponent: () => import('./not-detail/not-detail.component').then(m => m.NotDetailComponent) },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' }
 ];

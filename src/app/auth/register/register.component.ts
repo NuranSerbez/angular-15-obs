@@ -1,34 +1,54 @@
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
   registerData = {
     email: '',
     password: '',
     rol: '',
   };
 
-  constructor(private router: Router) {}
+  loading = false;
+  errorMessage = '';
 
   onRegister() {
     if (
-      this.registerData.email &&
-      this.registerData.password &&
-      this.registerData.rol
+      !this.registerData.email ||
+      !this.registerData.password ||
+      !this.registerData.rol
     ) {
-      localStorage.setItem('token', 'mock-token-123');
-      this.router.navigate(['/login']);
-    } else {
-      alert('E-posta şifre ve rol boş olamaz.');
+      this.errorMessage = 'E-posta, şifre ve rol boş olamaz.';
+      return;
     }
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.http.post<any>('http://localhost:8080/api/auth/signup', this.registerData)
+      .subscribe({
+        next: (response) => {
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          this.errorMessage = err.error?.message || 'Kayıt işlemi başarısız oldu.';
+          this.loading = false;
+        },
+        complete: () => {
+          this.loading = false;
+        }
+      });
   }
 }

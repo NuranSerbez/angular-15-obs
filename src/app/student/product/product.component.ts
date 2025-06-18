@@ -1,26 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [],
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  templateUrl: './product.component.html'
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
   title = "Ana Sayfa";
 
-  puan = [
-    { ders: 'Math', puani: 70 },
-    { ders: 'Network', puani: 80 }
-  ];
+  // puan = [
+  //   { id: 1, ders: 'Math', puani: 70 },
+  //   { id: 2, ders: 'Network', puani: 80 }
+  // ];
 
-  ders = ['Math', 'Network'];
+  // ders = ['Math', 'Network'];
+  // devam = ['Math - 2 Gün', 'Network - 0 Gün'];
 
-  devam = ['Math - 2 Gün', 'Network - 0 Gün'];
+  constructor(private router: Router) {}
 
-  constructor() { }
+goToNotDetail(studentId: number, noteId: number) {
+  this.router.navigate(['/student', studentId, 'note', noteId]);
+}
 
-  ngOnInit(): void { }
 }

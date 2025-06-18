@@ -1,5 +1,6 @@
 <h5>{{ title }}</h5>
 <div class="row">
+
   <div class="card m-2" style="width: 19rem;">
     <div class="card-body">
       <h5 class="card-title">Not Listesi</h5>
@@ -7,7 +8,12 @@
       <div *ngIf="puan && puan.length > 0; else noPuan">
         <p>Not Girişi var:</p>
         <ul>
-          <li *ngFor="let p of puan">{{ p.ders }}: {{ p.puani }}</li>
+          <li 
+            *ngFor="let p of puan" 
+            style="cursor: pointer; color: blue;"
+            (click)="goToNotDetail(p.studentId, p.id)">
+            {{ p.ders }}: {{ p.puani }}
+          </li>
         </ul>
       </div>
 
@@ -17,7 +23,7 @@
         </div>
       </ng-template>
 
-      <a href="#" class="btn btn-primary mt-2">Notlar</a>
+      <a routerLink="/note/1" class="btn btn-primary mt-2">Notlar</a>
     </div>
   </div>
 
@@ -38,7 +44,7 @@
         </div>
       </ng-template>
 
-      <a href="#" class="btn btn-primary mt-2">Dersler</a>
+      <a routerLink="/student" class="btn btn-primary mt-2">Dersler</a>
     </div>
   </div>
 
@@ -59,7 +65,8 @@
         </div>
       </ng-template>
 
-      <a href="#" class="btn btn-primary mt-2">Devamsızlık</a>
+      <a routerLink="/student" class="btn btn-primary mt-2">Devamsızlık</a>
     </div>
   </div>
+
 </div>
