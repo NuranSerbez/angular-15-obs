@@ -24,6 +24,7 @@ import { NoteComponent } from './rector/note/note.component';
     RectorComponent,
     StudentComponent,
     HomeComponent,
+
   ],
   imports: [
     BrowserModule,
