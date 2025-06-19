@@ -32,13 +32,28 @@ export class LoginComponent {
     this.loading = true;
     this.errorMessage = '';
 
-    this.http.post<any>('http://localhost:8080/api/auth/login', this.loginData).subscribe({
+    this.http.post<any>('http://localhost:8080/auth/login', this.loginData).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.role);
 
-        const role = response.role.toLowerCase();
-        this.router.navigate([`/${role}/dashboard`]);
+        // Backend'den gelen tckn varsa localStorage'a kaydet
+        if (response.tckn) {
+          localStorage.setItem('tckn', response.tckn);
+        }
+
+        switch (response.role) {
+          case 'IDARECI':
+            this.router.navigate(['/rector']);
+            break;
+          case 'OGRENCI':
+            this.router.navigate(['/student']);
+            break;
+
+          default:
+            this.router.navigate(['/dashboard']);
+            break;
+        }
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Giriş başarısız oldu.';

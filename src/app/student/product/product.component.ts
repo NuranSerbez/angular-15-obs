@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { GenericApiService } from 'src/app/service/generic-api.service';
 
 @Component({
   selector: 'app-product',
@@ -8,9 +8,24 @@ import { Router } from '@angular/router';
 })
 export class ProductComponent {
   title = "Ana Sayfa";
-  constructor(private router: Router) {}
+    constructor(private service: GenericApiService) {}
+getNotlar() {
+  this.service.get('not').subscribe({
+    next: res => console.log('Girilen notlar:', res),
+    error: err => console.error('Notları listeleme hatası:', err)
+  });
+}
+getDevamsizlik(){
+this.service.get('devamsizlik').subscribe({
+    next: res => console.log('Girilen devamsızlıklar:', res),
+    error: err => console.error('Devamsızlık listeleme hatası:', err)
+  });
+}
+getDersler(){
+this.service.get('ders').subscribe({
+    next: res => console.log('Kayıtlı dersler:', res),
+    error: err => console.error('Dersleri listeleme hatası:', err)
+  });
+}
+}
 
-goToNotDetail(studentId: number, noteId: number) {
-  this.router.navigate(['/student', studentId, 'note', noteId]);
-}
-}

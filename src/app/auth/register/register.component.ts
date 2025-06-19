@@ -19,6 +19,7 @@ export class RegisterComponent {
     email: '',
     password: '',
     rol: '',
+    tckn: '',
   };
 
   loading = false;
@@ -28,7 +29,8 @@ export class RegisterComponent {
     if (
       !this.registerData.email ||
       !this.registerData.password ||
-      !this.registerData.rol
+      !this.registerData.rol ||
+      !this.registerData.tckn
     ) {
       this.errorMessage = 'E-posta, şifre ve rol boş olamaz.';
       return;
@@ -37,11 +39,9 @@ export class RegisterComponent {
     this.loading = true;
     this.errorMessage = '';
 
-    this.http.post<any>('http://localhost:8080/api/auth/signup', this.registerData)
+    this.http.post<any>('http://localhost:8080/auth/signup', this.registerData)
       .subscribe({
-        next: (response) => {
-          this.router.navigate(['/login']);
-        },
+        next: (response) => { this.router.navigate(['/change-password']);},
         error: (err) => {
           this.errorMessage = err.error?.message || 'Kayıt işlemi başarısız oldu.';
           this.loading = false;

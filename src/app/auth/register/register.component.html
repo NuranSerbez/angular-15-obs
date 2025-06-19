@@ -26,19 +26,31 @@
           </div>
         </div>
         <div class="form-group mb-4">
-          <label for="rol">
-            <h5 class="card-title">Rol Türü</h5>
-          </label>
-          <select id="rol" name="rol" class="form-control" required [(ngModel)]="registerData.rol" #rol="ngModel">
-            <option value="" disabled selected>Rol seçiniz</option>
-            <option value="user">Akademisyen</option>
-            <option value="admin">idareci</option>
-            <option value="admin">Öğrenci</option>
-          </select>
-          <div *ngIf="rol.invalid && rol.touched" style="color: red;">
-            Rol boş olamaz
-          </div>
-        </div>
+  <label for="tckn">
+    <h5 class="card-title">TCKN</h5>
+  </label>
+  <input type="text" id="tckn" name="tckn" class="form-control" required maxlength="11" pattern="^[0-9]{11}$"
+    [(ngModel)]="registerData.tckn"  #tckn="ngModel"/>
+  <div *ngIf="tckn.invalid && tckn.touched" style="color: red;">
+    11 haneli geçerli bir TCKN girin.
+  </div>
+</div>
+
+<div class="form-group mb-4">
+  <label for="rol">
+    <h5 class="card-title">Rol Türü</h5>
+  </label>
+  <select id="rol" name="rol" class="form-control" required [(ngModel)]="registerData.rol" #rol="ngModel">
+    <option value="" disabled selected>Rol seçiniz</option>
+    <option value="AKADEMISYEN">Akademisyen</option>
+    <option value="IDARECI">İdareci</option>
+    <option value="OGRENCI">Öğrenci</option>
+  </select>
+  <div *ngIf="rol.invalid && rol.touched" style="color: red;">
+    Rol boş olamaz
+  </div>
+</div>
+
         <div class="text-center">
           <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Kayıt Ol</button>
         </div>

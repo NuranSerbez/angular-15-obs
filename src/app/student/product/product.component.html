@@ -1,72 +1,24 @@
 <h5>{{ title }}</h5>
-<div class="row">
-
-  <div class="card m-2" style="width: 19rem;">
-    <div class="card-body">
-      <h5 class="card-title">Not Listesi</h5>
-
-      <div *ngIf="puan && puan.length > 0; else noPuan">
-        <p>Not Girişi var:</p>
-        <ul>
-          <li 
-            *ngFor="let p of puan" 
-            style="cursor: pointer; color: blue;"
-            (click)="goToNotDetail(p.studentId, p.id)">
-            {{ p.ders }}: {{ p.puani }}
-          </li>
-        </ul>
-      </div>
-
-      <ng-template #noPuan>
-        <div class="alert alert-primary" role="alert">
-          Not Girişi Yapılmadı
-        </div>
-      </ng-template>
-
-      <a routerLink="/note/1" class="btn btn-primary mt-2">Notlar</a>
-    </div>
+<div class = "row">
+<div class="card" style="width: 19rem;">
+  <div class="card-body">
+    <h5 class="card-title">Not Listesi</h5>
+    <h6 class="card-title">Not girişlerini görüntülemek için tıklayınız.</h6><br>
+    <button class="btn btn-primary" (click)="getNotlar()">Listele</button>
   </div>
-
-  <div class="card m-2" style="width: 19rem;">
-    <div class="card-body">
-      <h5 class="card-title">Ders Listesi</h5>
-
-      <div *ngIf="ders && ders.length > 0; else noDers">
-        <p>Ders Eklendi:</p>
-        <ul>
-          <li *ngFor="let d of ders">{{ d }}</li>
-        </ul>
-      </div>
-
-      <ng-template #noDers>
-        <div class="alert alert-primary" role="alert">
-          Ders Eklenmedi
-        </div>
-      </ng-template>
-
-      <a routerLink="/student" class="btn btn-primary mt-2">Dersler</a>
-    </div>
+</div>
+<div class="card" style="width: 19rem;">
+  <div class="card-body">
+    <h5 class="card-title">Devamsızlık Listesi</h5>
+    <h6 class="card-title">Devamsızlık girişlerini görmek için tıklayınız.</h6><br>
+    <button class="btn btn-primary" (click)="getDevamsizlik()">Listele</button>
   </div>
-
-  <div class="card m-2" style="width: 19rem;">
-    <div class="card-body">
-      <h5 class="card-title">Devam Listesi</h5>
-
-      <div *ngIf="devam && devam.length > 0; else noDevam">
-        <p>Devamsızlık Görüntüle:</p>
-        <ul>
-          <li *ngFor="let d of devam">{{ d }}</li>
-        </ul>
-      </div>
-
-      <ng-template #noDevam>
-        <div class="alert alert-primary" role="alert">
-          Devamsızlık Eklenmedi
-        </div>
-      </ng-template>
-
-      <a routerLink="/student" class="btn btn-primary mt-2">Devamsızlık</a>
-    </div>
+</div>
+<div class="card" style="width: 19rem;">
+  <div class="card-body">
+    <h5 class="card-title">Ders Listesi</h5>
+    <h6 class="card-title">Kayıtlı olduğunuz dersleri görmek için tıklayınız.</h6><br>
+    <button class="btn btn-primary" (click)="getDersler()">Listele</button>
   </div>
-
+</div>
 </div>
