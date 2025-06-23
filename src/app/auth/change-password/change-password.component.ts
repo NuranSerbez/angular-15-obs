@@ -24,7 +24,7 @@ export class ChangePasswordComponent {
   errorMessage = '';
 
   onChangePassword(form: NgForm) {
-  console.log("Gelen TCKN:", this.passwordData.oldPassword); // 🔍 Buraya ekle
+  console.log("Gelen TCKN:", this.passwordData.oldPassword);
 
   if (form.invalid) {
     this.errorMessage = 'Lütfen formu eksiksiz doldurun.';

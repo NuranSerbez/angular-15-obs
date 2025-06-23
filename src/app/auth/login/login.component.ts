@@ -37,7 +37,6 @@ export class LoginComponent {
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.role);
 
-        // Backend'den gelen tckn varsa localStorage'a kaydet
         if (response.tckn) {
           localStorage.setItem('tckn', response.tckn);
         }
